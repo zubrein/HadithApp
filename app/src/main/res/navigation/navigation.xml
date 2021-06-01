@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/colectionFragment">
+
+    <fragment
+        android:id="@+id/colectionFragment"
+        android:name="xit.zubrein.hadith.ui.collection.CollectionFragment"
+        android:label="fragment_colection"
+        tools:layout="@layout/fragment_collection" >
+        <action
+            android:id="@+id/action_colectionFragment_to_chapterFragment"
+            app:destination="@id/chapterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chapterFragment"
+        android:name="xit.zubrein.hadith.ui.chapter.ChapterFragment"
+        android:label="ChapterFragment" >
+        <argument
+            android:name="collectionName"
+            app:argType="string" />
+    </fragment>
+</navigation>
