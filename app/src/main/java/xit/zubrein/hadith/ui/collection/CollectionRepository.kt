@@ -29,13 +29,10 @@ constructor(
         fetch = {
             apiService.getCollections()
         },
-        saveFetchResult = {
-            val list = it.data
+        saveFetchResult = { response ->
             db.withTransaction {
                 dao.deleteAllCollections()
-                for(item in list) {
-                    dao.insert(item)
-                }
+                dao.insertCollection(response)
             }
         }
     )

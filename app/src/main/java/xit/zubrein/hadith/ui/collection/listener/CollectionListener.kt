@@ -8,7 +8,7 @@ interface CollectionListener {
 
     fun collectionOnStart()
 
-    fun collectionOnReceived(collections : LiveData<Resource<List<ModelCollections.ModelBooks>>>)
+    fun collectionOnReceived(collections : LiveData<Resource<ModelCollections>>)
 
     fun collectionDidFailed(message : String)
 

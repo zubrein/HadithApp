@@ -5,24 +5,19 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 
-
-typealias Details = ModelDetails
-
+@Entity(tableName = "collection")
 data class ModelCollections(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     var data: List<ModelBooks>
-) {
-    @Entity(tableName = "books")
-    data class ModelBooks(
-        @PrimaryKey(autoGenerate = true)
-        var id: Int = 0,
-        var name: String,
-        var hasBooks: Boolean,
-        var hasChapters: Boolean,
-        var collection: List<ModelDetails>?
-    )
-}
+)
+data class ModelBooks(
+    var name: String,
+    var hasBooks: Boolean,
+    var hasChapters: Boolean,
+    var collection: List<ModelDetails>?
+)
 data class ModelDetails(
-    @PrimaryKey
     var lang: String,
     var title: String,
     var shortIntro: String,
@@ -31,8 +26,16 @@ data class ModelDetails(
 class CollectionConverter {
 
     @TypeConverter
-    fun listToJson(value: List<Details>) = Gson().toJson(value)
+    fun detailsListToJson(value: List<ModelDetails>) = Gson().toJson(value)
 
     @TypeConverter
-    fun jsonToList(value : String) = Gson().fromJson(value, Array<Details>::class.java).toList()
+    fun detailsJsonToList(value : String) = Gson().fromJson(value, Array<ModelDetails>::class.java).toList()
+
+    @TypeConverter
+    fun collectionListToJson(value: List<ModelBooks>) = Gson().toJson(value)
+
+    @TypeConverter
+    fun collectionJsonToList(value : String) = Gson().fromJson(value, Array<ModelBooks>::class.java).toList()
+
+
 }

@@ -6,10 +6,11 @@ import androidx.navigation.Navigation
 import xit.zubrein.hadith.R
 import xit.zubrein.hadith.base.BaseRecyclerviewAdapter
 import xit.zubrein.hadith.databinding.CollectionItemsBinding
+import xit.zubrein.hadith.model.ModelBooks
 import xit.zubrein.hadith.model.ModelCollections
 import xit.zubrein.hadith.ui.collection.CollectionFragmentDirections
 
-class CollectionAdapter(private val context:Context) : BaseRecyclerviewAdapter<ModelCollections.ModelBooks,CollectionItemsBinding>(){
+class CollectionAdapter(private val context:Context) : BaseRecyclerviewAdapter<ModelBooks,CollectionItemsBinding>(){
 
     override fun getLayout() = R.layout.collection_items
 

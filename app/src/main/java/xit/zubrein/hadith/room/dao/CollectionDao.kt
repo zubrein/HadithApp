@@ -8,14 +8,14 @@ import kotlinx.coroutines.flow.Flow
 import xit.zubrein.hadith.model.ModelCollections
 
 @Dao
-interface BooksDao {
+interface CollectionDao {
 
-    @Query("SELECT * FROM books")
-    fun getAllCollections() : Flow<List<ModelCollections.ModelBooks>>
+    @Query("SELECT * FROM collection")
+    fun getAllCollections() : Flow<ModelCollections>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(books : ModelCollections.ModelBooks)
+    suspend fun insertCollection(books : ModelCollections)
 
-    @Query("DELETE FROM books")
+    @Query("DELETE FROM collection")
     suspend fun deleteAllCollections()
 }

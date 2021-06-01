@@ -5,11 +5,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import xit.zubrein.hadith.model.CollectionConverter
 import xit.zubrein.hadith.model.ModelCollections
-import xit.zubrein.hadith.room.dao.BooksDao
+import xit.zubrein.hadith.room.dao.CollectionDao
 
 
-@Database(entities = [ModelCollections.ModelBooks::class],version = 1, exportSchema = false)
+@Database(entities = [ModelCollections::class],version = 1, exportSchema = false)
 @TypeConverters(CollectionConverter::class)
 abstract class AppDatabase : RoomDatabase(){
-    abstract fun booksDao(): BooksDao
+    abstract fun booksDao(): CollectionDao
 }

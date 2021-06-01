@@ -45,10 +45,11 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
     override fun collectionOnStart() {
     }
 
-    override fun collectionOnReceived(collections: LiveData<Resource<List<ModelCollections.ModelBooks>>>) {
+    override fun collectionOnReceived(collections: LiveData<Resource<ModelCollections>>) {
         collections.observe(this, Observer { result ->
-            collectionAdapter.addItems(result.data!!)
-            binding.errorMessage.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
+            Log.d(TAG, "collectionOnReceived: ${result.data?.data?.size}")
+            collectionAdapter.addItems(result.data?.data!!)
+            binding.errorMessage.isVisible = result is Resource.Error && result.data.data.isNullOrEmpty()
             binding.errorMessage.text = result.error?.localizedMessage
         })
 
