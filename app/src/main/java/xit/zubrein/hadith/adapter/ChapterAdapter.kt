@@ -5,9 +5,10 @@ import android.text.Html
 import xit.zubrein.hadith.R
 import xit.zubrein.hadith.base.BaseRecyclerviewAdapter
 import xit.zubrein.hadith.databinding.ChapterItemsBinding
+import xit.zubrein.hadith.model.Chapter
 import xit.zubrein.hadith.model.ModelChapter
 
-class ChapterAdapter(private val context:Context) : BaseRecyclerviewAdapter<ModelChapter.Data,ChapterItemsBinding>(){
+class ChapterAdapter(private val context:Context) : BaseRecyclerviewAdapter<Chapter,ChapterItemsBinding>(){
 
     override fun getLayout() = R.layout.chapter_items
 

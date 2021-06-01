@@ -26,13 +26,7 @@ constructor(
 
         chapterListener?.chapterOnStart()
 
-        val chapters = repository.getChapters(collectionName).catch {
-            e ->
-            Log.d(TAG, "getCollections: ${e.message}")
-            e.message?.let {
-                chapterListener?.chapterDidFailed(it)
-            }
-        }.asLiveData()
+        val chapters = repository.getChapters(collectionName).asLiveData()
 
         chapterListener?.chapterOnReceived(chapters)
 

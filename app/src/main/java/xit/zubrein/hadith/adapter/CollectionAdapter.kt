@@ -17,8 +17,9 @@ class CollectionAdapter(private val context:Context) : BaseRecyclerviewAdapter<M
     override fun onBindViewHolder(holder: Companion.BaseViewHolder<CollectionItemsBinding>, position: Int) {
         holder.binding.apply {
             val item = items[position]
-            nameEng = item.collection?.get(0)?.title
-            nameAr = Html.fromHtml(item.collection?.get(1)?.title).toString()
+
+            nameEng = item.collection?.get(0)?.title!!
+            nameAr = Html.fromHtml(item.collection?.get(1)?.title)!!.toString()
             parent.setOnClickListener {
                 val action =  CollectionFragmentDirections.actionColectionFragmentToChapterFragment(item.name)
                 Navigation.findNavController(parent).navigate(action)

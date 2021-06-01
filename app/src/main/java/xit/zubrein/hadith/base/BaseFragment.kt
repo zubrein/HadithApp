@@ -35,11 +35,16 @@ abstract class BaseFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() {
         viewModel = activity?.run {
             ViewModelProvider(this)[getViewModel()]
         } ?: throw Exception("Invalid Activity")
-
         onViewReady()
 
         return binding.root
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
 
     abstract fun getLayout(): Int
     abstract fun getViewModel(): Class<VM>
