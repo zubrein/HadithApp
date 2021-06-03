@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/colectionFragment"
         android:name="xit.zubrein.hadith.ui.collection.CollectionFragment"
-        android:label="fragment_colection"
+        android:label="Hadith Collections"
         tools:layout="@layout/fragment_collection" >
         <action
             android:id="@+id/action_colectionFragment_to_chapterFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/chapterFragment"
         android:name="xit.zubrein.hadith.ui.chapter.ChapterFragment"
-        android:label="ChapterFragment" >
+        android:label="Chapters" >
         <argument
             android:name="collectionName"
             app:argType="string" />
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/hadithListFragment"
         android:name="xit.zubrein.hadith.ui.hadithlist.HadithListFragment"
-        android:label="HadithListFragment" >
+        android:label="List of Hadiths" >
         <argument
             android:name="collectionName"
             app:argType="string" />
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/singleHadithFragment"
         android:name="xit.zubrein.hadith.ui.singlehadith.SingleHadithFragment"
-        android:label="SingleHadithFragment" >
+        android:label="Details " >
         <argument
             android:name="collectionName"
             app:argType="string" />

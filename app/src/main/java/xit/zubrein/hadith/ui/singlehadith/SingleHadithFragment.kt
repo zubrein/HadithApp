@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -37,11 +39,17 @@ class SingleHadithFragment : BaseFragment<FragmentSingleHadithBinding, SingleHad
     }
 
     override fun onReceived(hadith: LiveData<Resource<SingleHadith>>) {
-        hadith.observe(this, Observer {
-            val data = it.data
+        hadith.observe(this, Observer {result ->
+
+            binding.errorMessage.isVisible = result is Resource.Error && result.data == null
+            binding.progressBar.isInvisible = result is Resource.Error && result.data == null
+            binding.errorMessage.text = result.error?.localizedMessage
+
+            val data = result.data
             if(data != null) {
                 binding.hadithAr = Html.fromHtml(data.hadith.get(1).body).toString()
                 binding.hadithEn = Html.fromHtml(data.hadith.get(0).body).toString()
+                binding.progressBar.visibility = View.GONE
             }
         })
     }

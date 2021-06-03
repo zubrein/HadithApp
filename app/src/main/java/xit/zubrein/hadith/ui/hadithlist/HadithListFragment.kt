@@ -1,6 +1,8 @@
 package xit.zubrein.hadith.ui.hadithlist
 
 import android.util.Log
+import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -42,12 +44,15 @@ class HadithListFragment : BaseFragment<FragmentHadithListBinding,HadithListView
     override fun HadithListOnReceived(list: LiveData<Resource<ModelHadith>>) {
         list.observe(this, Observer { result ->
             Log.d(TAG, "hadithListOnReceived: ${result.data?.data?.size}")
+
+            binding.progressBar.isInvisible = result is Resource.Error && result.data?.data.isNullOrEmpty()
+            binding.errorMessage.isVisible = result is Resource.Error && result.data?.data.isNullOrEmpty()
+            binding.errorMessage.text = result.error?.localizedMessage
+
             val hadithList = result.data?.data
             if (hadithList != null) {
                 hadithAdapter.addItems(hadithList)
-                binding.errorMessage.isVisible =
-                    result is Resource.Error && result.data.data.isNullOrEmpty()
-                binding.errorMessage.text = result.error?.localizedMessage
+                binding.progressBar.visibility = View.GONE
             }
         })
     }

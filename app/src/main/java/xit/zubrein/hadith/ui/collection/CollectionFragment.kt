@@ -1,6 +1,8 @@
 package xit.zubrein.hadith.ui.collection
 
 import android.util.Log
+import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -35,17 +37,21 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
     }
 
     override fun collectionOnStart() {
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     override fun collectionOnReceived(collections: LiveData<Resource<ModelCollections>>) {
         collections.observe(this, Observer { result ->
             Log.d(TAG, "collectionOnReceived: ${result.data?.data?.size}")
+
+            binding.errorMessage.isVisible = result is Resource.Error && result.data?.data.isNullOrEmpty()
+            binding.progressBar.isInvisible = result is Resource.Error && result.data?.data.isNullOrEmpty()
+            binding.errorMessage.text = result.error?.localizedMessage
+
             val collectionList = result.data?.data
             if(collectionList != null) {
                 collectionAdapter.addItems(collectionList)
-                binding.errorMessage.isVisible =
-                    result is Resource.Error && result.data.data.isNullOrEmpty()
-                binding.errorMessage.text = result.error?.localizedMessage
+                binding.progressBar.visibility = View.GONE
             }
         })
 
@@ -53,6 +59,7 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
 
     override fun collectionDidFailed(message: String) {
         Log.d(TAG, "collectionDidFailed: $message")
+        binding.progressBar.visibility = View.GONE
     }
 
 }

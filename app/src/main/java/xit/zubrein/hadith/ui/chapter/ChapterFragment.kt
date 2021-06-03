@@ -1,6 +1,8 @@
 package xit.zubrein.hadith.ui.chapter
 
 import android.util.Log
+import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -41,13 +43,17 @@ class ChapterFragment : BaseFragment<FragmentChapterBinding, ChapterViewModel>()
     override fun chapterOnReceived(chapters: LiveData<Resource<ModelChapter>>) {
         chapters.observe(this, Observer { result ->
             Log.d(TAG, "chapterOnReceived: ${result.data?.data?.size}")
+
+            binding.errorMessage.isVisible = result is Resource.Error && result.data?.data.isNullOrEmpty()
+            binding.progressBar.isInvisible = result is Resource.Error && result.data?.data.isNullOrEmpty()
+            binding.errorMessage.text = result.error?.localizedMessage
+
             val chapterList = result.data?.data
             if (chapterList != null) {
                 chapterAdapter.addItems(chapterList)
-                binding.errorMessage.isVisible =
-                    result is Resource.Error && result.data.data.isNullOrEmpty()
-                binding.errorMessage.text = result.error?.localizedMessage
+                binding.progressBar.visibility = View.GONE
             }
+
         })
     }
 
