@@ -13,4 +13,10 @@ object ApiConstants {
     //Chapters
     const val CHAPTERS = "collections/{collectionName}/books"
 
+    //HadithList
+    const val HADITH_LIST = "$CHAPTERS/{bookNumber}/hadiths"
+
+    //SingleHadith
+    const val SINGLE_HADITH = "collections/{collectionName}/hadiths/{hadithNumber}"
+
 }

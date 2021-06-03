@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import xit.zubrein.hadith.R
 import xit.zubrein.hadith.Utils.cacheutils.Resource
 import xit.zubrein.hadith.adapter.ChapterAdapter
@@ -18,7 +19,7 @@ class ChapterFragment : BaseFragment<FragmentChapterBinding, ChapterViewModel>()
 
     private val args: ChapterFragmentArgs by navArgs()
 
-    private val chapterAdapter by lazy { ChapterAdapter(requireContext()) }
+    private val chapterAdapter by lazy { ChapterAdapter(requireContext(),args.collectionName) }
 
     override fun getLayout() = R.layout.fragment_chapter
 
@@ -26,7 +27,7 @@ class ChapterFragment : BaseFragment<FragmentChapterBinding, ChapterViewModel>()
 
     override fun onViewReady() {
         binding.chapterRV.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(context)
             adapter = chapterAdapter
         }
         viewModel.chapterListener = this

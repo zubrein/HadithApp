@@ -21,5 +21,33 @@
         <argument
             android:name="collectionName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_chapterFragment_to_hadithListFragment"
+            app:destination="@id/hadithListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hadithListFragment"
+        android:name="xit.zubrein.hadith.ui.hadithlist.HadithListFragment"
+        android:label="HadithListFragment" >
+        <argument
+            android:name="collectionName"
+            app:argType="string" />
+        <argument
+            android:name="bookNumber"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_hadithListFragment_to_singleHadithFragment"
+            app:destination="@id/singleHadithFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleHadithFragment"
+        android:name="xit.zubrein.hadith.ui.singlehadith.SingleHadithFragment"
+        android:label="SingleHadithFragment" >
+        <argument
+            android:name="collectionName"
+            app:argType="string" />
+        <argument
+            android:name="hadithNumber"
+            app:argType="string" />
     </fragment>
 </navigation>
